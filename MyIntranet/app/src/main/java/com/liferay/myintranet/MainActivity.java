@@ -40,9 +40,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		this.value = true;
 
-		if ("nhpatt@gmail.com".equals(emailView.getText().toString()) && "pass".equals(
+		String email = emailView.getText().toString();
+		if ("nhpatt@gmail.com".equals(email) && "pass".equals(
 			passwordView.getText().toString())) {
-			startActivity(new Intent(this, HomeActivity.class));
+			Intent intent = new Intent(this, HomeActivity.class);
+			intent.putExtra("email", email);
+			startActivity(intent);
 		} else {
 			Toast.makeText(this, "Wrong user or password :(", Toast.LENGTH_LONG).show();
 		}
