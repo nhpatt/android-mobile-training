@@ -6,4 +6,5 @@
 	<string name="home">Home!</string>
 	<string name="take_picture">Take picture</string>
 	<string name="avatar_of_the_user">Avatar of the user</string>
+	<string name="edit_button">Edit Button</string>
 </resources>
