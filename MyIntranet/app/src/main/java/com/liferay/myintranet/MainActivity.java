@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		this.value = true;
 
 		String email = emailView.getText().toString();
-		if ("nhpatt@gmail.com".equals(email) && "pass".equals(
+		if ("n".equals(email) && "n".equals(
 			passwordView.getText().toString())) {
 			Intent intent = new Intent(this, HomeActivity.class);
 			intent.putExtra("email", email);

@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -23,6 +25,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 		Button takePictureView = findViewById(R.id.take_picture);
 		takePictureView.setOnClickListener(this);
+
+		String[] roles = { "admin", "power user" };
+		ListView rolesView = findViewById(R.id.roles);
+		rolesView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, roles));
 	}
 
 	@Override
