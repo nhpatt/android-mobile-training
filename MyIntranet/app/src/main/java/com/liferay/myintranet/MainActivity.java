@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 			@Override
 			public void onSuccess(JSONObject result) {
-				Intent intent = new Intent(MainActivity.this, WebContentActivity.class);
+				Intent intent = new Intent(MainActivity.this, HomeActivity.class);
 				intent.putExtra("email", email);
 				startActivity(intent);
 			}

@@ -13,8 +13,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.liferay.mobile.android.auth.basic.BasicAuthentication;
+import com.liferay.mobile.android.callback.file.FileProgressCallback;
+import com.liferay.mobile.android.http.file.UploadData;
+import com.liferay.mobile.android.service.Session;
+import com.liferay.mobile.android.service.SessionImpl;
+import com.liferay.mobile.android.v7.dlapp.DLAppService;
 import com.liferay.myintranet.adapter.Role;
 import com.liferay.myintranet.adapter.RoleAdapter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,10 +68,41 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 		if (requestCode == 1) {
 			if (resultCode == Activity.RESULT_OK) {
 				Bundle extras = data.getExtras();
-				Bitmap imageBitmap = (Bitmap) extras.get("data");
+				final Bitmap imageBitmap = (Bitmap) extras.get("data");
 
 				ImageView imageView = findViewById(R.id.profile);
 				imageView.setImageBitmap(imageBitmap);
+
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						Session session = new SessionImpl("http://10.0.3.2:8080",
+							new BasicAuthentication("test@liferay.com", "test"));
+
+						try {
+							DLAppService dlAppService = new DLAppService(session);
+
+							ByteArrayOutputStream bos = new ByteArrayOutputStream();
+							imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, bos);
+							byte[] bitmapdata = bos.toByteArray();
+							ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
+
+							String fileName = "name1";
+							UploadData uploadData = new UploadData(bs, fileName, new FileProgressCallback() {
+								@Override
+								public void onProgress(int totalBytes) {
+									System.out.println(totalBytes);
+								}
+							});
+							long repositoryId = 20143L;
+							long folderId = 42599L;
+							dlAppService.addFileEntry(repositoryId, folderId, fileName, "image/jpeg", fileName,
+								"description", "changeLog", uploadData, null);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}).start();
 			}
 		}
 	}

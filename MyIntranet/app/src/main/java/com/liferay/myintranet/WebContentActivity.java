@@ -22,8 +22,8 @@ public class WebContentActivity extends AppCompatActivity {
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		BasicAuthentication basicAuthentication = new BasicAuthentication("test@liferay.com", "test");
-		BatchSessionImpl session = new BatchSessionImpl("http://10.0.3.2:8080", basicAuthentication);
+		BasicAuthentication auth = new BasicAuthentication("test@liferay.com", "test");
+		BatchSessionImpl session = new BatchSessionImpl("http://10.0.3.2:8080", auth);
 
 		session.setCallback(new BatchCallback() {
 			@Override
