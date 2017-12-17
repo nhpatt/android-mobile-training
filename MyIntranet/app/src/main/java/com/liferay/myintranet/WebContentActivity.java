@@ -5,12 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import com.liferay.mobile.android.auth.basic.BasicAuthentication;
-import com.liferay.mobile.android.callback.typed.JSONObjectCallback;
+import com.liferay.mobile.android.callback.BatchCallback;
+import com.liferay.mobile.android.callback.typed.JSONArrayCallback;
+import com.liferay.mobile.android.service.BatchSessionImpl;
 import com.liferay.mobile.android.service.Session;
-import com.liferay.mobile.android.service.SessionImpl;
 import com.liferay.mobile.android.v7.journalarticle.JournalArticleService;
+import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class WebContentActivity extends AppCompatActivity {
 
@@ -22,19 +23,21 @@ public class WebContentActivity extends AppCompatActivity {
 		setSupportActionBar(toolbar);
 
 		BasicAuthentication basicAuthentication = new BasicAuthentication("test@liferay.com", "test");
-		Session session = new SessionImpl("http://10.0.3.2:8080", basicAuthentication);
+		BatchSessionImpl session = new BatchSessionImpl("http://10.0.3.2:8080", basicAuthentication);
 
-		session.setCallback(new JSONObjectCallback() {
+		session.setCallback(new BatchCallback() {
 			@Override
 			public void onFailure(Exception exception) {
 
 			}
 
 			@Override
-			public void onSuccess(JSONObject article) {
+			public void onSuccess(JSONArray articles) {
 				TextView content = findViewById(R.id.web_content);
 				try {
-					content.setText(article.getString("content"));
+					String content0 = articles.getJSONObject(0).getString("content");
+					String content1 = articles.getJSONObject(1).getString("content");
+					content.setText(content0 + content1);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -45,6 +48,8 @@ public class WebContentActivity extends AppCompatActivity {
 
 		try {
 			journalArticleService.getArticle(44492);
+			journalArticleService.getArticle(44500);
+			session.invoke();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
