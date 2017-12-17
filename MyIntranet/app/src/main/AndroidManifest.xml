@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.liferay.myintranet">
 
+	<uses-permission android:name="android.permission.INTERNET"/>
+
 	<application
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
@@ -17,6 +19,11 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".HomeActivity">
+		</activity>
+		<activity
+			android:name=".WebContentActivity"
+			android:label="@string/title_activity_web_content"
+			android:theme="@style/AppTheme.NoActionBar">
 		</activity>
 	</application>
 

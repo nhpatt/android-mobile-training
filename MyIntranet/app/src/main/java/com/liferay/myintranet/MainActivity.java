@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		String email = emailView.getText().toString();
 		if ("n".equals(email) && "n".equals(
 			passwordView.getText().toString())) {
-			Intent intent = new Intent(this, HomeActivity.class);
+			Intent intent = new Intent(this, WebContentActivity.class);
 			intent.putExtra("email", email);
 			startActivity(intent);
 		} else {
