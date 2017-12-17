@@ -82,13 +82,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 						try {
 							DLAppService dlAppService = new DLAppService(session);
 
-							ByteArrayOutputStream bos = new ByteArrayOutputStream();
-							imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, bos);
-							byte[] bitmapdata = bos.toByteArray();
-							ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
+							ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+							imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream);
+							byte[] bytes = outputStream.toByteArray();
+							ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
 
 							String fileName = "name1";
-							UploadData uploadData = new UploadData(bs, fileName, new FileProgressCallback() {
+							UploadData uploadData = new UploadData(inputStream, fileName, new FileProgressCallback() {
 								@Override
 								public void onProgress(int totalBytes) {
 									System.out.println(totalBytes);
