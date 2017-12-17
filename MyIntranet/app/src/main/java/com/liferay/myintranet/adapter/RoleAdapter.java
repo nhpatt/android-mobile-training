@@ -1,32 +1,48 @@
 package com.liferay.myintranet.adapter;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.liferay.myintranet.R;
+import java.util.List;
 
-public class RoleAdapter extends ArrayAdapter<Role> {
+public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
 
-	public RoleAdapter(@NonNull Context context, Role[] roles) {
-		super(context, R.layout.role_edit, roles);
+	private final List<Role> roles;
+
+	public RoleAdapter(List<Role> roles) {
+		this.roles = roles;
 	}
 
-	@NonNull
 	@Override
-	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.role_edit, parent, false));
+	}
 
-		if (convertView == null) {
-			convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.role_edit, parent, false);
+	@Override
+	public void onBindViewHolder(ViewHolder holder, int position) {
+		holder.paint(roles.get(position));
+	}
+
+	@Override
+	public int getItemCount() {
+		return roles.size();
+	}
+
+	class ViewHolder extends RecyclerView.ViewHolder {
+
+		private final TextView name;
+
+		ViewHolder(View itemView) {
+			super(itemView);
+
+			name = itemView.findViewById(R.id.name);
 		}
 
-		TextView roleView = convertView.findViewById(R.id.name);
-		roleView.setText(getItem(position).getName());
-
-		return convertView;
+		void paint(Role role) {
+			name.setText(role.getName());
+		}
 	}
 }

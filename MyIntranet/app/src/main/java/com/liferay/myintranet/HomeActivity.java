@@ -6,15 +6,24 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.liferay.myintranet.adapter.Role;
 import com.liferay.myintranet.adapter.RoleAdapter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+
+	private List<Role> roles;
+	private RoleAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +36,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 		Button takePictureView = findViewById(R.id.take_picture);
 		takePictureView.setOnClickListener(this);
 
-		Role[] roles = { new Role("admin"), new Role("power user") };
-		ListView rolesView = findViewById(R.id.roles);
-		rolesView.setAdapter(new RoleAdapter(this, roles));
+		roles = new ArrayList<>(Arrays.asList(new Role("admin"), new Role("power user")));
+
+		RecyclerView listView = findViewById(R.id.roles);
+		listView.setLayoutManager(new LinearLayoutManager(this));
+		listView.setAdapter(new RoleAdapter(roles));
 	}
 
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		startActivityForResult(intent, 1);
+		if (v.getId() == R.id.take_picture) {
+			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+			startActivityForResult(intent, 1);
+		} else {
+			Toast.makeText(this, "Try to edit", Toast.LENGTH_SHORT).show();
+			roles.add(new Role("User"));
+			adapter.notifyDataSetChanged();
+		}
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

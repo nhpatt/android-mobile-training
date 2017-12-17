@@ -33,7 +33,7 @@
 		app:layout_constraintTop_toBottomOf="@+id/email"
 		/>
 
-	<ListView
+	<android.support.v7.widget.RecyclerView
 		android:id="@+id/roles"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
