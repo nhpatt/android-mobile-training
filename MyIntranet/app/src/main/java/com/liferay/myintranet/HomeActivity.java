@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.liferay.myintranet.adapter.Role;
@@ -40,7 +39,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 		RecyclerView listView = findViewById(R.id.roles);
 		listView.setLayoutManager(new LinearLayoutManager(this));
-		listView.setAdapter(new RoleAdapter(roles));
+		adapter = new RoleAdapter(roles, this);
+		listView.setAdapter(adapter);
 	}
 
 	@Override

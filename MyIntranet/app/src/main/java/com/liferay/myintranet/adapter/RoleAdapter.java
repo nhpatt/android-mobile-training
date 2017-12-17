@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.liferay.myintranet.R;
 import java.util.List;
@@ -11,9 +12,11 @@ import java.util.List;
 public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
 
 	private final List<Role> roles;
+	private final View.OnClickListener onClickListener;
 
-	public RoleAdapter(List<Role> roles) {
+	public RoleAdapter(List<Role> roles, View.OnClickListener onClickListener) {
 		this.roles = roles;
+		this.onClickListener = onClickListener;
 	}
 
 	@Override
@@ -33,16 +36,19 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.ViewHolder> {
 
 	class ViewHolder extends RecyclerView.ViewHolder {
 
-		private final TextView name;
+		private final TextView nameView;
+		private final ImageView editView;
 
 		ViewHolder(View itemView) {
 			super(itemView);
 
-			name = itemView.findViewById(R.id.name);
+			nameView = itemView.findViewById(R.id.name);
+			editView = itemView.findViewById(R.id.edit);
+			editView.setOnClickListener(onClickListener);
 		}
 
 		void paint(Role role) {
-			name.setText(role.getName());
+			nameView.setText(role.getName());
 		}
 	}
 }
