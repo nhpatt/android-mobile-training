@@ -8,6 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.liferay.mobile.android.auth.SignIn;
+import com.liferay.mobile.android.auth.basic.BasicAuthentication;
+import com.liferay.mobile.android.callback.typed.JSONObjectCallback;
+import com.liferay.mobile.android.service.Session;
+import com.liferay.mobile.android.service.SessionImpl;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,15 +46,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		this.value = true;
 
-		String email = emailView.getText().toString();
-		if ("n".equals(email) && "n".equals(
-			passwordView.getText().toString())) {
-			Intent intent = new Intent(this, WebContentActivity.class);
-			intent.putExtra("email", email);
-			startActivity(intent);
-		} else {
-			Toast.makeText(this, "Wrong user or password :(", Toast.LENGTH_LONG).show();
-		}
+		final String email = emailView.getText().toString();
+		final String password = passwordView.getText().toString();
+
+		BasicAuthentication basicAuthentication = new BasicAuthentication(email, password);
+		Session session = new SessionImpl("http://10.0.3.2:8080", basicAuthentication);
+
+		SignIn.signIn(session, new JSONObjectCallback() {
+			@Override
+			public void onFailure(Exception exception) {
+				Toast.makeText(MainActivity.this, "Wrong user or password :(", Toast.LENGTH_LONG).show();
+			}
+
+			@Override
+			public void onSuccess(JSONObject result) {
+				Intent intent = new Intent(MainActivity.this, WebContentActivity.class);
+				intent.putExtra("email", email);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
