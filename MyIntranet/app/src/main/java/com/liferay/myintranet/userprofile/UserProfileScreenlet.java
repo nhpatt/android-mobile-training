@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import com.liferay.mobile.screens.base.BaseScreenlet;
+import com.liferay.mobile.screens.cache.CachePolicy;
 import com.liferay.mobile.screens.context.User;
 import com.liferay.myintranet.R;
 
@@ -46,6 +47,7 @@ public class UserProfileScreenlet extends BaseScreenlet<UserProfileViewModel, Us
 
 	@Override
 	protected void onUserAction(String userActionName, UserProfileInteractor interactor, Object... args) {
+		setCachePolicy(CachePolicy.CACHE_FIRST);
 		interactor.start(userId);
 	}
 
@@ -55,7 +57,7 @@ public class UserProfileScreenlet extends BaseScreenlet<UserProfileViewModel, Us
 	}
 
 	@Override
-	public void onError(Exception e) {
-		getViewModel().showFailedOperation(BaseScreenlet.DEFAULT_ACTION, e);
+	public void error(Exception e, String action) {
+		getViewModel().showFailedOperation(action, e);
 	}
 }
