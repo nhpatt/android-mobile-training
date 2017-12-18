@@ -25,14 +25,14 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 
 		SessionContext.loadStoredCredentials(CredentialsStorageBuilder.StorageType.SHARED_PREFERENCES);
 		if (SessionContext.isLoggedIn()) {
-			startActivity(new Intent(this, GalleryActivity.class));
+			startActivity(new Intent(this, WebContentActivity.class));
 		}
 	}
 
 	@Override
 	public void onLoginSuccess(User user) {
 		Toast.makeText(this, user.getFirstName(), Toast.LENGTH_SHORT).show();
-		startActivity(new Intent(this, GalleryActivity.class));
+		startActivity(new Intent(this, WebContentActivity.class));
 	}
 
 	@Override
