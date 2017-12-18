@@ -8,9 +8,18 @@
 	tools:context="com.liferay.myintranet.GalleryActivity"
 	>
 
+	<com.liferay.myintranet.userprofile.UserProfileScreenlet
+		android:id="@+id/user_profile"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layoutId="@layout/user_profile_view"
+		app:userId="20156"
+		/>
+
 	<com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:layout_below="@+id/user_profile"
 		app:folderId="51001"
 		app:repositoryId="20143"
 		/>

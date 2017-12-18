@@ -14,4 +14,9 @@
 	<string name="avatar_of_the_user">Avatar of the user</string>
 	<string name="edit_button">Edit Button</string>
 	<string name="title_activity_web_content">WebContentActivity</string>
+
+	<declare-styleable name="UserProfileScreenlet">
+		<attr name="userId"/>
+		<attr name="layoutId"/>
+	</declare-styleable>
 </resources>
