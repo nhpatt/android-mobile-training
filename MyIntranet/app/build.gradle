@@ -24,7 +24,11 @@ dependencies {
 	implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
 	implementation 'com.android.support:design:26.1.0'
-	compile 'com.liferay.mobile:liferay-android-sdk:7.0.7'
+	implementation 'com.liferay.mobile:liferay-android-sdk:7.0.7'
+
+	implementation ('com.liferay.mobile:liferay-screens:+') {
+		exclude group: 'com.android.support'
+	}
 
 	compile 'com.android.support:recyclerview-v7:26.1.0'
 	testImplementation 'junit:junit:4.12'
