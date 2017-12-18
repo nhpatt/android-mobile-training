@@ -4,9 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+import com.liferay.mobile.android.auth.SignIn;
+import com.liferay.mobile.android.callback.typed.JSONObjectCallback;
 import com.liferay.mobile.screens.auth.login.LoginListener;
 import com.liferay.mobile.screens.auth.login.LoginScreenlet;
+import com.liferay.mobile.screens.context.SessionContext;
 import com.liferay.mobile.screens.context.User;
+import com.liferay.mobile.screens.context.storage.CredentialsStorageBuilder;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
@@ -17,6 +22,11 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 
 		LoginScreenlet loginScreenlet = findViewById(R.id.login);
 		loginScreenlet.setListener(this);
+
+		SessionContext.loadStoredCredentials(CredentialsStorageBuilder.StorageType.SHARED_PREFERENCES);
+		if (SessionContext.isLoggedIn()) {
+			startActivity(new Intent(this, WebContentActivity.class));
+		}
 	}
 
 	@Override
