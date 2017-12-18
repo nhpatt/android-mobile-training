@@ -19,31 +19,5 @@ public class WebContentActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_web_content);
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-
-		Session session = SessionContext.createSessionFromCurrentSession();
-		session.setCallback(new JSONObjectCallback() {
-			@Override
-			public void onFailure(Exception exception) {
-
-			}
-
-			@Override
-			public void onSuccess(JSONObject article) {
-				TextView content = findViewById(R.id.web_content);
-				try {
-					content.setText(article.getString("content"));
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-		JournalArticleService journalArticleService = new JournalArticleService(session);
-
-		try {
-			journalArticleService.getArticle(44492);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }
