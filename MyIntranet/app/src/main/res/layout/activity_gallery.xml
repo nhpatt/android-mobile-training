@@ -13,6 +13,6 @@
 		android:layout_height="match_parent"
 		app:folderId="51001"
 		app:repositoryId="20143"
-		></com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet>
+		/>
 
 </RelativeLayout>
