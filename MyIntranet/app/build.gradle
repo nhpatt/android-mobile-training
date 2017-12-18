@@ -30,7 +30,7 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 
-	implementation ('com.liferay.mobile:liferay-material-viewset:+') {
+	implementation('com.liferay.mobile:liferay-material-viewset:+') {
 		exclude group: 'com.android.support'
 	}
 	compile 'com.android.support:recyclerview-v7:26.1.0'

@@ -5,15 +5,14 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context="com.liferay.myintranet.LoginActivity"
+	tools:context="com.liferay.myintranet.GalleryActivity"
 	>
 
-	<com.liferay.mobile.screens.auth.login.LoginScreenlet
-		android:id="@+id/login"
+	<com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		app:credentialsStorage="shared_preferences"
-		app:loginMode="cookie"
-		/>
+		app:folderId="51001"
+		app:repositoryId="20143"
+		></com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet>
 
 </RelativeLayout>

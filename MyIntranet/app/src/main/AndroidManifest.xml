@@ -38,6 +38,8 @@
 		</activity>
 		<activity android:name=".DDLFormActivity">
 		</activity>
+		<activity android:name=".GalleryActivity">
+		</activity>
 	</application>
 
 </manifest>
