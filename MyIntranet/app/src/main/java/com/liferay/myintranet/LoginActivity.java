@@ -1,5 +1,6 @@
 package com.liferay.myintranet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 	@Override
 	public void onLoginSuccess(User user) {
 		Toast.makeText(this, user.getFirstName(), Toast.LENGTH_SHORT).show();
+		startActivity(new Intent(this, WebContentActivity.class));
 	}
 
 	@Override
