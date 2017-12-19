@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context="com.liferay.myapplication.ContentActivity"
+	>
+
+	<com.liferay.mobile.screens.webcontent.display.WebContentDisplayScreenlet
+		android:id="@+id/web_content_display"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:cachePolicy="CACHE_FIRST"
+		/>
+
+	<!--<com.liferay.mobile.screens.ddl.form.DDLFormScreenlet-->
+	<!--android:layout_width="match_parent"-->
+	<!--android:layout_height="match_parent"-->
+	<!--app:structureId="31106"-->
+	<!--/>-->
+
+	<com.liferay.myapplication.UserProfileScreenlet
+		android:id="@+id/my_user_profile"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@+id/web_content_display"
+		app:layoutId="@layout/my_user_profile"
+		app:userProfileId="20156"
+		/>
+
+	<!--<com.liferay.mobile.screens.imagegallery.ImageGalleryScreenlet-->
+	<!--android:layout_width="match_parent"-->
+	<!--android:layout_height="match_parent"-->
+	<!--android:layout_below="@+id/my_user_profile"-->
+	<!--app:folderId="31119"-->
+	<!--app:repositoryId="20143"-->
+	<!--/>-->
+
+</RelativeLayout>
