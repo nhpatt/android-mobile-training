@@ -1,4 +1,4 @@
 target 'pushapp'
 use_frameworks!
 pod 'Liferay-iOS-SDK'
-pod 'Liferay-Push', :git => 'https://github.com/nhpatt/liferay-push-ios.git', :branch => 'support_for_7'
+pod 'Liferay-Push'
